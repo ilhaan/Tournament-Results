@@ -22,7 +22,7 @@ If you are unable to install either of the packages above, you may follow the in
 
 Once you have cloned this repository and installed all the required software packages, follow the instructions listed below to test this project:
 
-1. Change your working directory to the cloned repository: `cd (path-to-cloned-repo)/Tournament-Results`
+1. Change your working directory to the cloned repository: `cd (path-to-cloned-repo)/Tournament-Results/`
 2. Create the 'tournament' database: `psql -c "create database tournament;"`
 3. Connect psql to the 'tournament' database: `psql tournament`
 4. Import tables and views: `\i tournament.sql`
