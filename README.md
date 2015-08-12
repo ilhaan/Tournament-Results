@@ -28,3 +28,5 @@ Once you have cloned this repository and installed all the required software pac
 4. Import tables and views: `\i tournament.sql`
 5. Quit psql: `\q`
 6. Run the Python test script: `python tournament_test.py`
+
+Please note that importing the database schema (step 4 above) removes all previous tables and views in the tournament database. 
