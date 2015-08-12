@@ -21,20 +21,20 @@ DROP TABLE IF EXISTS Match_List;
 -- if players table exists, drop it
 DROP TABLE IF EXISTS players;
 
--- Create players table
+-- Create players table: table will consist of Player IDs and Names
 CREATE TABLE players (
   id SERIAL PRIMARY KEY,
   name varchar(255)
 );
 
--- Create match table
+-- Create match table: table will consist of all matches in tournament
 CREATE TABLE Match_List (
   player int references players(id),
   opponent int references players(id),
   result int -- 0: player loses & opp wins, 1: player wins & opp loses
 );
 
--- Create Win_Count view
+-- Create Win_Count view: list no. of wins for each player
 CREATE VIEW Win_Count AS
   SELECT players.id, COUNT(Matches.opponent) AS wins
   FROM players
@@ -42,7 +42,7 @@ CREATE VIEW Win_Count AS
   ON players.id = Matches.player
   GROUP BY players.id;
 
--- Create Match_Count view
+-- Create Match_Count view: list no. of matches for each player
 CREATE VIEW Match_Count AS
   SELECT players.id, COUNT(Match_List.opponent) AS matches
   FROM players
@@ -50,8 +50,9 @@ CREATE VIEW Match_Count AS
   ON players.id = Match_List.player
   GROUP BY players.id;
 
--- Create Standings view
+-- Create Standings view: list no. of wins and mathces for all players
 CREATE VIEW Standings AS
-  SELECT players.id, players.name, Win_Count.wins as wins, Match_Count.matches as matches
+  SELECT players.id, players.name, Win_Count.wins as wins,
+  Match_Count.matches as matches
   FROM players, Win_Count, Match_Count
   WHERE players.id = Win_Count.id and Win_Count.id = Match_Count.id;
