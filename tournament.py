@@ -68,7 +68,8 @@ def playerStandings():
     """
     db = connect()
     c = db.cursor()
-    c.execute("SELECT id, name, wins, matches FROM Standings ORDER BY wins DESC;")
+    c.execute("SELECT id, name, wins, matches FROM Standings ORDER BY wins \
+             DESC;")
     rows = c.fetchall()
     db.close()
     return rows
@@ -84,9 +85,11 @@ def reportMatch(winner, loser):
     db = connect()
     c = db.cursor()
     # Insert winner
-    c.execute("INSERT INTO Match_List (player, opponent, result) VALUES (%s,%s,1)", (winner, loser))
+    c.execute("INSERT INTO Match_List (player, opponent, result) VALUES \
+             (%s,%s,1)", (winner, loser))
     # Insert loser
-    c.execute("INSERT INTO Match_List (player, opponent, result) VALUES (%s,%s,0)", (loser, winner))
+    c.execute("INSERT INTO Match_List (player, opponent, result) VALUES \
+             (%s,%s,0)", (loser, winner))
     db.commit()
     db.close()
 
