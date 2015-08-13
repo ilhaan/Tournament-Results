@@ -6,20 +6,9 @@
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
 
--- if Standings view exists, drop it
-DROP VIEW IF EXISTS Standings;
-
--- if Match_Count view exists, drop it
-DROP VIEW IF EXISTS Match_Count;
-
--- if Win_Count view exists, drop it
-DROP VIEW IF EXISTS Win_Count;
-
--- if Match_List table exists, drop it
-DROP TABLE IF EXISTS Match_List;
-
--- if players table exists, drop it
-DROP TABLE IF EXISTS players;
+-- Check if database already exists and drop if it does
+DROP DATABASE IF EXISTS tournament;
+CREATE DATABASE tournament;
 
 -- Create players table: table will consist of Player IDs and Names
 CREATE TABLE players (
