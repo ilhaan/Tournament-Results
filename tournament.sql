@@ -10,6 +10,9 @@
 DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
 
+-- Connect to database
+\c tournament
+
 -- Create players table: table will consist of Player IDs and Names
 CREATE TABLE players (
   id SERIAL PRIMARY KEY,
