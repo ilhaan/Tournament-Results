@@ -18,6 +18,7 @@ CREATE TABLE players (
 
 -- Create match table: table will consist of all matches in tournament
 CREATE TABLE Match_List (
+  match_id SERIAL PRIMARY KEY,
   player int references players(id),
   opponent int references players(id),
   result int -- 0: player loses & opp wins, 1: player wins & opp loses
