@@ -22,25 +22,25 @@ CREATE TABLE players (
 -- Create match table: table will consist of all matches in tournament
 CREATE TABLE Match_List (
   match_id SERIAL PRIMARY KEY,
-  player int references players(id),
-  opponent int references players(id),
+  winner int references players(id),
+  loser int references players(id),
   result int -- 0: player loses & opp wins, 1: player wins & opp loses
 );
 
 -- Create Win_Count view: list no. of wins for each player
 CREATE VIEW Win_Count AS
-  SELECT players.id, COUNT(Matches.opponent) AS wins
+  SELECT players.id, COUNT(Matches.loser) AS wins
   FROM players
   LEFT JOIN (SELECT * FROM Match_List WHERE result>0) as Matches
-  ON players.id = Matches.player
+  ON players.id = Matches.winner
   GROUP BY players.id;
 
 -- Create Match_Count view: list no. of matches for each player
 CREATE VIEW Match_Count AS
-  SELECT players.id, COUNT(Match_List.opponent) AS matches
+  SELECT players.id, COUNT(Match_List.loser) AS matches
   FROM players
   LEFT JOIN Match_List
-  ON players.id = Match_List.player
+  ON players.id = Match_List.winner
   GROUP BY players.id;
 
 -- Create Standings view: list no. of wins and mathces for all players
