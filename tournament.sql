@@ -23,25 +23,26 @@ CREATE TABLE players (
 CREATE TABLE Match_List (
   match_id SERIAL PRIMARY KEY,
   winner int references players(id),
-  loser int references players(id),
-  result int -- 0: player loses & opp wins, 1: player wins & opp loses
+  loser int references players(id)
 );
 
--- Create Win_Count view: list no. of wins for each player
+-- Create Win_List view: list player ids and no. of wins
 CREATE VIEW Win_Count AS
-  SELECT players.id, COUNT(Matches.loser) AS wins
-  FROM players
-  LEFT JOIN (SELECT * FROM Match_List WHERE result>0) as Matches
-  ON players.id = Matches.winner
-  GROUP BY players.id;
-
--- Create Match_Count view: list no. of matches for each player
-CREATE VIEW Match_Count AS
-  SELECT players.id, COUNT(Match_List.loser) AS matches
+  SELECT players.id, COUNT(Match_List.winner) AS wins
   FROM players
   LEFT JOIN Match_List
   ON players.id = Match_List.winner
-  GROUP BY players.id;
+  GROUP BY players.id
+  ORDER BY wins DESC;
+
+-- Create Match_Count view: list player ids and no. of matches
+CREATE VIEW Match_Count AS
+  SELECT players.id, COUNT(Match_List.match_id) AS matches
+  FROM players
+  LEFT JOIN Match_List
+  ON players.id = winner or players.id = loser
+  GROUP BY players.id
+  ORDER BY matches DESC;
 
 -- Create Standings view: list no. of wins and mathces for all players
 CREATE VIEW Standings AS
