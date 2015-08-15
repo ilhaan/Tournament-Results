@@ -23,7 +23,7 @@ If you are unable to install either of the packages above, you may follow the in
 Once you have cloned this repository and installed all the required software packages, follow the instructions listed below to test this project:
 
 1. Change your working directory to the cloned repository: `cd (path-to-cloned-repo)/Tournament-Results/`
-2. Create the 'tournament' database and it's tables and views: `psql -c "\i tournament.sql"`
+2. Create the 'tournament' database and it's tables and views: `psql -f tournament.sql`
 3. Run the Python test script: `python tournament_test.py`
 
 Please note that importing the database schema (step 4 above) drops any existing database named 'tournament' and recreates it with tables and views for this project. 
