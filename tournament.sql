@@ -44,7 +44,7 @@ CREATE VIEW Match_Count AS
   GROUP BY players.id
   ORDER BY matches DESC;
 
--- Create Standings view: list no. of wins and mathces for all players
+-- Create Standings view: list no. of wins and matches for all players
 CREATE VIEW Standings AS
   SELECT players.id, players.name, Win_Count.wins as wins,
   Match_Count.matches as matches
